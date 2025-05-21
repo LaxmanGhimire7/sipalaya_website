@@ -88,7 +88,7 @@ function AddCourse() {
         {/* Rating */}
         <div>
           <label htmlFor="rating" className="block text-sm font-medium text-blue-700">
-            Rating (0–5)
+            Rating (0-5)
           </label>
           <input
             type="number"
@@ -105,7 +105,7 @@ function AddCourse() {
         {/* Price */}
         <div>
           <label htmlFor="price" className="block text-sm font-medium text-blue-700">
-            Price ($)
+            Price (Rs)
           </label>
           <input
             type="number"
@@ -121,7 +121,7 @@ function AddCourse() {
         {/* Discount Price */}
         <div>
           <label htmlFor="discountPrice" className="block text-sm font-medium text-blue-700">
-            Discount Price ($)
+            Discount Price (Rs)
           </label>
           <input
             type="number"

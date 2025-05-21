@@ -69,7 +69,6 @@ const login = async (req, res) => {
 };
 
 const getUser = (req, res) => {
-  console.log(req.user);
   res.status(200).json({ status: 200, msg: "user found", user: req.user });
 };
 

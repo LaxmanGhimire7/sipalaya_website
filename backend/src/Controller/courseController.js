@@ -58,4 +58,12 @@ const createCourse = async (req, res) => {
   }
 };
 
-module.exports = { createCourse };
+ const getAllCourse =async (req, res)=>{
+    let response =await Course.find({});
+    if (!response) {
+    return res.status(404).json({ status: 404, msg: "Course not Found " });
+  }
+  res.status(200).json({ status: 200, msg: "Course found ", response });
+  }
+
+module.exports = { createCourse, getAllCourse };
