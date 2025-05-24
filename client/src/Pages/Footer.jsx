@@ -1,4 +1,3 @@
-
 import sipalayalogo from "../assets/sipalayalogo.png";
 import esewa from "../images/esewa.png";
 import khalti from "../images/khalti.png";
