@@ -13,7 +13,7 @@ function Navigation() {
       </div>
       <div className="flex gap-6">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/allCourse">All Courses</NavLink>
+        <NavLink to="/allCourses">All Courses</NavLink>
         <NavLink to="/aboutUS">About Us</NavLink>
         <NavLink to="/registration">Registration</NavLink>
         <NavLink to="/UserProfile">User Profile</NavLink>

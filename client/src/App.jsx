@@ -8,12 +8,15 @@ import Header from "./Pages/Header";
 import Login from "./Pages/Login";
 import Registration from "./Pages/Registration";
 import TermsAndConditions from "./Pages/TermsAndCondition";
-import AllCourse from "./Pages/AllCourse";
 import UserProfile from "./Pages/UserProfile";
 import Dashboard from "./Admin/Dashboard";
 import UserManagement from "./Admin/UserManagement";
 import CourseManagement from "./Admin/CourseManagement";
 import AddCourse from "./Admin/AddCourse";
+import EditCourse from "./Admin/EditCourse";
+import AllCourses from "./Pages/AllCourses";
+import CourseDetails from "./Pages/CourseDetails";
+import AdminHome from "./Admin/AdminHome";
 
 
 
@@ -26,19 +29,27 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/allCourse" element={<AllCourse />} />
-        <Route path="/UserProfile" element={<UserProfile />} />
+        <Route path="/allCourses" element={<AllCourses/>} />
+        <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/students-login" element={<Login />} />
         <Route path="/registration" element={<Registration/>}/>
-        <Route path="/ChoosingSipalaya" element={<ChoosingSipalaya />} />
+        <Route path="/choosingSipalaya" element={<ChoosingSipalaya />} />
         <Route path="/footer" element={<Footer />} />
-        <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+        <Route path="/CourseDetails" element={<CourseDetails />} />
+
+
 
         <Route path="/dashboard/" element={<Dashboard />}>
+        <Route path="adminHome" element={<AdminHome/>} />
+        <Route index element={<AdminHome />} />
           <Route path="course" element={<CourseManagement />} />
-          <Route index element={<CourseManagement />} />
+          
           <Route path="user" element={<UserManagement />} />
-         <Route path="addCourse" element={<AddCourse />} />
+         <Route path="course/addCourse" element={<AddCourse />} />
+         <Route path="course/editCourse" element={<EditCourse />} />
+
+
         </Route>
       </Routes>
     </div>

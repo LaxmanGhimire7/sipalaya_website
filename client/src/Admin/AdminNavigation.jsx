@@ -18,6 +18,7 @@ function AdminNavigation() {
           <p>{user?.role?.toUpperCase()}</p>
         </div>
       </NavLink>
+      <NavLink to="adminHome">Home</NavLink>
       <NavLink to="course">Course Management </NavLink>
       <NavLink to="user">User Management </NavLink>
     </div>

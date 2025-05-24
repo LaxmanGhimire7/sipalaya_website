@@ -66,4 +66,57 @@ const createCourse = async (req, res) => {
   res.status(200).json({ status: 200, msg: "Course found ", response });
   }
 
-module.exports = { createCourse, getAllCourse };
+
+  const deleteCourse = async (req, res) => {
+  const courseId = req.params.id;
+  console.log(courseId);
+
+  if (!courseId) {
+    return res.status(400).json({ status: 400, msg: "Course Id Not Found" });
+  }
+
+  try {
+    let response = await Course.findByIdAndDelete(courseId);
+
+    if (!response) {
+      return res.status(404).json({ status: 404, msg: "Course not found" });
+    }
+
+    return res.status(200).json({ status: 200, msg: "Course is Deleted", data: response });
+  } catch (error) {
+    console.error("Error deleting course:", error);
+    return res.status(500).json({ status: 500, msg: "Server error" });
+  }
+};
+
+
+const editCourse = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, instructor, rating, price, discountPrice, isBestseller, isFeatured } = req.body;
+
+    let updateFields = {
+      name,
+      instructor,
+      rating,
+      price,
+      discountPrice,
+      isBestseller,
+      isFeatured,
+    };
+
+    if (req.file) {
+      updateFields.image = req.file.filename;
+    }
+
+    const response = await Course.findByIdAndUpdate({ _id: id }, updateFields, { new: true });
+
+    res.status(200).json({ status: 200, msg: "Course Updated", response });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 500, msg: "Server Error", error: error.message });
+  }
+};
+
+
+module.exports = { createCourse, getAllCourse, deleteCourse, editCourse };
