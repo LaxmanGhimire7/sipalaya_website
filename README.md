@@ -5,7 +5,7 @@
 
 A full-stack educational platform built with MERN stack (MongoDB, Express, React, Node.js) offering professional Flutter development courses.
 
-![MERN Stack Architecture](https://via.placeholder.com/800x400.png?text=MERN+Stack+Application)
+![MERN Stack Architecture]
 ![image](https://github.com/user-attachments/assets/57ae7dc5-2286-4e3f-aaf5-564a192f40ea)
 ![image](https://github.com/user-attachments/assets/216d1d85-a6b4-4049-a4a2-484856e090b4)
 
