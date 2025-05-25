@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["student","instructor", "admin"],
+      enum: ["student", "instructor", "admin"],
       default: "student",
     },
 
@@ -64,11 +64,9 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-
-    socialProfiles: {
-      googleId: String,
-      facebookId: String,
-      githubId: String,
+    isActive: {
+      type: Boolean,
+      default: false,
     },
 
     preferences: {

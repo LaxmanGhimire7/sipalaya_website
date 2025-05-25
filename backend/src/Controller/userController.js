@@ -72,7 +72,7 @@ const getUser = (req, res) => {
   res.status(200).json({ status: 200, msg: "user found", user: req.user });
 };
 
-  const getAllUser = async (req, res) => {
+const getAllUser = async (req, res) => {
     try {
       let userDetail = await user.find({});
       if (!userDetail) {
@@ -86,4 +86,45 @@ const getUser = (req, res) => {
     }
   };
 
-module.exports = { register, login, getUser, getAllUser };
+const editUser = async (req, res) => {
+  try {
+    const users = req.user;
+    const image = req.file?.filename || "default";  // optional chaining
+
+    const { firstName, lastName, userName, phone, email } = req.body;
+
+    let response = await user.findByIdAndUpdate(
+      users._id,
+      {
+        firstName,
+        lastName,
+        phone,
+        userName,
+        email,
+        image,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: 200,
+      msg: "User updated successfully",
+      response: response,
+    });
+  } catch (error) {
+    res.status(500).json({ status: 500, msg: "Server Error", error });
+  }
+};
+
+
+
+  const deleteUser = async (req, res)=>{
+    let {id} = req.params;
+    if(!id){
+      return req.status(400).json({status:400, msg:"ID not found"})
+    }
+ let response=await user.findByIdAndDelete({_id:id})
+  res.status(200).json({status:200,msg:"User is Deleted",response})
+  }
+
+module.exports = { register, login, getUser, getAllUser, deleteUser, editUser };
