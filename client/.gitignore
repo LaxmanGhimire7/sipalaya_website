@@ -25,7 +25,6 @@ dist-ssr
 backend/.env
 
 # Ignore uploaded files (e.g., images)
-src/Middleware/upload.js
 uploads/
 .env
 
