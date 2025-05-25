@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 backend/.env
-backend/middleware/upload.js
+
+# Ignore uploaded files (e.g., images)
+src/Middleware/upload.js
+uploads/
