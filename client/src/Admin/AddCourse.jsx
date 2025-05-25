@@ -1,6 +1,19 @@
-import { useState } from "react";
+
+  import { useState } from "react";
+import { 
+  BookOpenIcon,
+  UserCircleIcon,
+  StarIcon,
+  ClockIcon,
+  CurrencyRupeeIcon,
+  TagIcon,
+  PhotoIcon,
+  CheckBadgeIcon,
+  FireIcon
+} from "@heroicons/react/24/outline";
 
 function AddCourse() {
+  
   const [name, setName] = useState("");
   const [instructor, setInstructor] = useState("");
   const [rating, setRating] = useState(0);
@@ -34,157 +47,182 @@ function AddCourse() {
     console.log(response);
   };
 
+
   return (
-    <>
-   <div className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg border border-blue-200">
-      <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">
-        Add New Course
-      </h2>
-      <form onSubmit={formSubmit} className="space-y-5">
-        {/* Course Name */}
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-blue-700">
-            Course Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            required
-            placeholder="Enter course name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+    <div className=" p-10 ml-52 mt-8 bg-white rounded-xl shadow-lg border border-blue-50">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold text-blue-800 flex items-center justify-center gap-2">
+          <BookOpenIcon className="h-8 w-8 text-blue-600" />
+          Add New Course
+        </h2>
+        <p className="text-gray-600 mt-2">Fill in the details to create a new course</p>
+      </div>
 
-        {/* Image Upload */}
-        <div>
-          <label htmlFor="image" className="block text-sm font-medium text-blue-700">
-            Course Image
-          </label>
-          <input
-            type="file"
-            id="image"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md bg-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
-          />
-        </div>
+      <form onSubmit={formSubmit} className="space-y-6">
+        <div className="flex flex-wrap gap-6">
+          {/* Left Column */}
+          <div className="flex-1 min-w-[300px] space-y-6">
+            {/* Course Name */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <BookOpenIcon className="h-5 w-5 text-blue-600" />
+                Course Name
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="Add Course Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Instructor */}
-        <div>
-          <label htmlFor="instructor" className="block text-sm font-medium text-blue-700">
-            Instructor Name
-          </label>
-          <input
-            type="text"
-            id="instructor"
-            placeholder="Enter instructor name"
-            value={instructor}
-            onChange={(e) => setInstructor(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+            {/* Instructor */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <UserCircleIcon className="h-5 w-5 text-blue-600" />
+                Instructor Name
+              </label>
+              <input
+                type="text"
+                placeholder="Enter Course Name"
+                value={instructor}
+                onChange={(e) => setInstructor(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Rating */}
-        <div>
-          <label htmlFor="rating" className="block text-sm font-medium text-blue-700">
-            Rating (0-5)
-          </label>
-          <input
-            type="number"
-            id="rating"
-            min="0"
-            max="5"
-            step="0.1"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+            {/* Rating */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <StarIcon className="h-5 w-5 text-blue-600" />
+                Rating (0-5)
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="5"
+                step="0.1"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Price */}
-        <div>
-          <label htmlFor="price" className="block text-sm font-medium text-blue-700">
-            Price (Rs)
-          </label>
-          <input
-            type="number"
-            id="price"
-            step="0.01"
-            min="0"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+            {/* Duration */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <ClockIcon className="h-5 w-5 text-blue-600" />
+                Duration
+              </label>
+              <input
+                type="text"
+                placeholder="e.g., 10 hours"
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
 
-        {/* Discount Price */}
-        <div>
-          <label htmlFor="discountPrice" className="block text-sm font-medium text-blue-700">
-            Discount Price (Rs)
-          </label>
-          <input
-            type="number"
-            id="discountPrice"
-            step="0.01"
-            min="0"
-            value={discountPrice}
-            onChange={(e) => setDiscountPrice(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+          {/* Right Column */}
+          <div className="flex-1 min-w-[300px] space-y-6">
+            {/* Price */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <CurrencyRupeeIcon className="h-5 w-5 text-blue-600" />
+                Original Price
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Duration */}
-        <div>
-          <label htmlFor="duration" className="block text-sm font-medium text-blue-700">
-            Duration
-          </label>
-          <input
-            type="text"
-            id="duration"
-            placeholder="e.g., 10 hours"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-            className="w-full mt-1 px-4 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
+            {/* Discount Price */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <TagIcon className="h-5 w-5 text-blue-600" />
+                Discount Price
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                value={discountPrice}
+                onChange={(e) => setDiscountPrice(e.target.value)}
+                className="w-full px-4 py-2 border border-blue-100 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
 
-        {/* Checkboxes */}
-        <div className="flex gap-6">
-          <label className="flex items-center text-sm font-medium text-blue-700">
-            <input
-              type="checkbox"
-              checked={isBestseller}
-              onChange={(e) => setIsBestseller(e.target.checked)}
-              className="mr-2 rounded focus:ring-blue-500"
-            />
-            Bestseller
-          </label>
+            {/* Image Upload */}
+            <div className="space-y-2">
+              <label className="flex items-center text-sm font-medium text-blue-800 gap-2">
+                <PhotoIcon className="h-5 w-5 text-blue-600" />
+                Course Thumbnail
+              </label>
+              <div className="flex items-center gap-4">
+                <input
+                  type="file"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                
+              </div>
+            </div>
 
-          <label className="flex items-center text-sm font-medium text-blue-700">
-            <input
-              type="checkbox"
-              checked={isFeatured}
-              onChange={(e) => setIsFeatured(e.target.checked)}
-              className="mr-2 rounded focus:ring-blue-500"
-            />
-            Featured
-          </label>
+            {/* Checkboxes */}
+            <div className="flex flex-col gap-4 mt-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={isBestseller}
+                  onChange={(e) => setIsBestseller(e.target.checked)}
+                  className="h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                />
+                <span className="flex items-center gap-1 text-sm font-medium text-blue-800">
+                  <FireIcon className="h-5 w-5 text-orange-500" />
+                  Bestseller
+                </span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={isFeatured}
+                  onChange={(e) => setIsFeatured(e.target.checked)}
+                  className="h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                />
+                <span className="flex items-center gap-1 text-sm font-medium text-blue-800">
+                  <CheckBadgeIcon className="h-5 w-5 text-green-500" />
+                  Featured Course
+                </span>
+              </label>
+            </div>
+          </div>
         </div>
 
         {/* Submit Button */}
-        <div className="text-center">
+        <div className="mt-8">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full transition duration-300"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
           >
-            Submit Course
+            <BookOpenIcon className="h-5 w-5" />
+            Create Course
           </button>
         </div>
       </form>
     </div>
-    </>
   );
 }
 
 export default AddCourse;
+
+
+

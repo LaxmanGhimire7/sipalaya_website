@@ -54,91 +54,123 @@ function EditCourse() {
   };
 
   return (
-    <div className="flex justify-center mt-6">
+     <div className="flex justify-center ml-56 items-center min-h-scree p-4">
       <form
         onSubmit={handleEditCourse}
-        className="flex flex-col shadow-2xl shadow-gray-400 items-center w-[700px] p-6 bg-white rounded-xl"
+        className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 space-y-6"
       >
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-4 border-b pb-4">
+          Edit Course Details
+        </h2>
+
         {/* Existing course image */}
         {courseImage && (
-          <img
-            className="h-20 mb-4 rounded-lg"
-            src={`http://localhost:9000/image/${courseImage}`}
-            alt="Course"
-          />
+          <div className="flex flex-col items-center">
+            <img
+              className="h-32 w-32 object-cover rounded-lg border-2 border-gray-200 mb-4"
+              src={`http://localhost:9000/image/${courseImage}`}
+              alt="Course"
+            />
+          </div>
         )}
 
-        <label>Course Image</label>
-        <input
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+        {/* Course Image Upload */}
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Course Image
+          </label>
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 transition"
+          />
+        </div>
 
-        <label>Course Name</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+        {/* Form Fields */}
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">Course Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            />
+          </div>
 
-        <label>Instructor</label>
-        <input
-          type="text"
-          value={instructorName}
-          onChange={(e) => setInstructorName(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">Instructor</label>
+            <input
+              type="text"
+              value={instructorName}
+              onChange={(e) => setInstructorName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            />
+          </div>
 
-        <label>Rating</label>
-        <input
-          type="number"
-          step="0.1"
-          value={courseRating}
-          onChange={(e) => setCourseRating(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">Rating</label>
+            <input
+              type="number"
+              step="0.1"
+              value={courseRating}
+              onChange={(e) => setCourseRating(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            />
+          </div>
 
-        <label>Price</label>
-        <input
-          type="number"
-          value={coursePrice}
-          onChange={(e) => setCoursePrice(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Price</label>
+              <input
+                type="number"
+                value={coursePrice}
+                onChange={(e) => setCoursePrice(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
 
-        <label>Discount Price</label>
-        <input
-          type="number"
-          value={courseDiscountPrice}
-          onChange={(e) => setCourseDiscountPrice(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        />
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Discount Price</label>
+              <input
+                type="number"
+                value={courseDiscountPrice}
+                onChange={(e) => setCourseDiscountPrice(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              />
+            </div>
+          </div>
 
-        <label>Bestseller</label>
-        <select
-          value={bestseller}
-          onChange={(e) => setBestseller(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        >
-          <option value="false">No</option>
-          <option value="true">Yes</option>
-        </select>
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Bestseller</label>
+              <select
+                value={bestseller}
+                onChange={(e) => setBestseller(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              >
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
 
-        <label>Featured</label>
-        <select
-          value={featured}
-          onChange={(e) => setFeatured(e.target.value)}
-          className="outline-none border w-96 p-2 mb-4 rounded-lg"
-        >
-          <option value="false">No</option>
-          <option value="true">Yes</option>
-        </select>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Featured</label>
+              <select
+                value={featured}
+                onChange={(e) => setFeatured(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+              >
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <button
           type="submit"
-          className="bg-orange-500 text-white py-2 px-6 rounded-xl hover:bg-orange-600 transition-all"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
         >
           Update Course
         </button>

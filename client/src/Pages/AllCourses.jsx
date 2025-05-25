@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { CiEdit } from "react-icons/ci";
-import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaRegStar, FaShoppingCart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function AllCourses() {
@@ -16,91 +15,96 @@ function AllCourses() {
     getCourse();
   }, []);
   return (
-    <div className="p-9 ml-28 ">
-      <div>
+   <div className="p-8  min-h-screen">
+      <div className="mx-auto">
         {course.length > 0 ? (
-          <div className="flex flex-wrap gap-12">
-            {course.map((item) => {
-              return (
-                <div onClick={()=>{
-                    navigate('/CourseDetails',{
-                       state: {...item},
-                    });
-                }}
-                  key={item._id}
-                  className="w-[380px] bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-                >
+          <div className="flex flex-wrap justify-center gap-12">
+            {course.map((item) => (
+              <div 
+                key={item._id}
+                onClick={() => navigate('/CourseDetails', { state: {...item} })}
+                className="flex-1 max-w-[400px] bg-white rounded-2xl shadow-xl hover:shadow-3xl transition-all duration-300 overflow-hidden group cursor-pointer"
+              >
+                <div className="relative h-60">
                   <img
                     src={`http://localhost:9000/image/${item.image}`}
                     alt={item.name}
-                    className="h-44 w-full object-cover"
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    {item.isBestseller && (
+                      <span className="bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                        Bestseller
+                      </span>
+                    )}
+                    {item.isFeatured && (
+                      <span className="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                </div>
 
-                  <div className="p-4 flex flex-col">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-1">
-                      {item.name}
-                    </h2>
-                    <p className="text-sm text-gray-500 mb-2">
-                      Instructor: {item.instructor}
-                    </p>
+                <div className="p-6 flex flex-col gap-4">
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900 truncate">{item.name}</h2>
+                    <p className="text-sm text-gray-500 mt-1">By {item.instructor}</p>
+                  </div>
 
-                    <div className="flex items-center gap-1 text-yellow-500 text-sm mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="flex text-amber-400">
                       {Array.from({ length: 5 }, (_, i) => {
                         const r = item.rating;
-                        if (r >= i + 1) return <FaStar key={i} />;
-                        else if (r >= i + 0.5) return <FaStarHalfAlt key={i} />;
-                        else
-                          return (
-                            <FaRegStar key={i} className="text-gray-300" />
-                          );
+                        if (r >= i + 1) return <FaStar key={i} className="w-5 h-5" />;
+                        else if (r >= i + 0.5) return <FaStarHalfAlt key={i} className="w-5 h-5" />;
+                        else return <FaRegStar key={i} className="w-5 h-5 text-gray-200" />;
                       })}
-                      <span className="ml-2 text-gray-600 font-medium">
-                        {item.rating}
-                      </span>
                     </div>
+                    <span className="text-sm font-medium text-gray-500">({item.rating})</span>
+                  </div>
 
-                    <div className="flex items-center gap-2 mb-2">
-                      {item.discountPrice < item.price && (
-                        <span className="text-sm text-red-400 line-through">
-                          Rs {item.price}
-                        </span>
-                      )}
-                      <span className="text-xl font-bold text-gray-800">
-                        Rs {item.discountPrice}
-                      </span>
-                    </div>
+                  <div className="flex items-baseline gap-3">
+                    {item.discountPrice < item.price && (
+                      <span className="text-sm text-gray-400 line-through">Rs {item.price}</span>
+                    )}
+                    <span className="text-2xl font-bold text-blue-600">
+                      Rs {item.discountPrice}
+                    </span>
+                  </div>
 
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {item.isBestseller && (
-                        <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full">
-                          Bestseller
-                        </span>
-                      )}
-                      {item.isFeatured && (
-                        <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                          Featured
-                        </span>
-                      )}
-                    </div>
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                      ⏳ {item.duration} months
+                    </span>
+                  </div>
 
-                    <p className="text-sm text-gray-500 mb-4">
-                      Duration: {item.duration} months
-                    </p>
-
-                    {/* Enroll Button */}
+                  <div className="flex gap-3 mt-4">
                     <button
-                      onClick={() => navigate(`/course/${item._id}`)}
-                      className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium py-2 w-full rounded-md transition mb-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/course/${item._id}`);
+                      }}
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
                     >
                       Enroll Now
                     </button>
+                    <button
+                      onClick={(e) => e.stopPropagation()}
+                      className="p-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg transition-all flex items-center justify-center"
+                    >
+                      <FaShoppingCart className="w-6 h-6" />
+                    </button>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         ) : (
-          <div>Loading...</div>
+          <div className="flex justify-center items-center h-96">
+            <div className="text-2xl text-gray-400 animate-pulse">
+              Loading Courses...
+            </div>
+          </div>
         )}
       </div>
     </div>

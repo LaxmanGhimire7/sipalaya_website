@@ -1,8 +1,9 @@
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+
+
+  import { FaStar, FaStarHalfAlt, FaRegStar, FaTrash } from "react-icons/fa";
+import { CiEdit } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { CiEdit } from "react-icons/ci";
-
 
 function CourseManagement() {
   const [courseList, setCourseList] = useState([]);
@@ -43,98 +44,109 @@ try {
   }, []);
 
   return (
-    <div className="px-8 py-8 bg-gradient-to-br from-gray-50 via-white to-gray-100 min-h-screen">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Course Management</h1>
-        <NavLink
-          to="addCourse"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm shadow transition"
-        >
-          ➕ Add New Course
-        </NavLink>
-      </div>
+    <div className="px-8 py-8 bg-gradient-to-br from-gray-50 via-blue-50 to-gray-100 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Course Management
+          </h1>
+          <NavLink
+            to="addCourse"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+          >
+            <span>+</span>
+            Add New Course
+          </NavLink>
+        </div>
 
-      <div className="flex flex-wrap gap-8">
-        {courseList.length > 0 ? (
-          courseList.map((item) => (
-            <div
-              key={item._id}
-              className="w-[350px] bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-            >
-              <img
-                src={`http://localhost:9000/image/${item.image}`}
-                alt={item.name}
-                className="h-44 w-full object-cover"
-              />
-
-              <div className="p-4 flex flex-col">
-                <h2 className="text-lg font-semibold text-gray-900 mb-1">{item.name}</h2>
-                <p className="text-sm text-gray-500 mb-2">Instructor: {item.instructor}</p>
-
-                <div className="flex items-center gap-1 text-yellow-500 text-sm mb-2">
-                  {Array.from({ length: 5 }, (_, i) => {
-                    const r = item.rating;
-                    if (r >= i + 1) return <FaStar key={i} />;
-                    else if (r >= i + 0.5) return <FaStarHalfAlt key={i} />;
-                    else return <FaRegStar key={i} className="text-gray-300" />;
-                  })}
-                  <span className="ml-2 text-gray-600 font-medium">{item.rating}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {courseList.length > 0 ? (
+            courseList.map((item) => (
+              <div
+                key={item._id}
+                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              >
+                <div className="relative">
+                  <img
+                    src={`http://localhost:9000/image/${item.image}`}
+                    alt={item.name}
+                    className="h-48 w-full object-cover"
+                  />
+                  <div className="absolute top-2 right-2 flex gap-2">
+                    {item.isBestseller && (
+                      <span className="bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                        Bestseller
+                      </span>
+                    )}
+                    {item.isFeatured && (
+                      <span className="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                        Featured
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2 mb-2">
-                  {item.discountPrice < item.price && (
-                    <span className="text-sm text-red-400 line-through">Rs {item.price}</span>
-                  )}
-                  <span className="text-xl font-bold text-gray-800">Rs {item.discountPrice}</span>
-                </div>
+                <div className="p-5 flex flex-col gap-3">
+                  <h2 className="text-xl font-bold text-gray-900 truncate">{item.name}</h2>
+                  <p className="text-sm text-gray-500 font-medium">By {item.instructor}</p>
 
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {item.isBestseller && (
-                    <span className="bg-green-100 text-green-700 text-xs font-medium px-2 py-1 rounded-full">
-                      Bestseller
-                    </span>
-                  )}
-                  {item.isFeatured && (
-                    <span className="bg-purple-100 text-purple-700 text-xs font-medium px-2 py-1 rounded-full">
-                      Featured
-                    </span>
-                  )}
-                </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex text-yellow-400">
+                      {Array.from({ length: 5 }, (_, i) => {
+                        const r = item.rating;
+                        if (r >= i + 1) return <FaStar key={i} className="w-4 h-4" />;
+                        else if (r >= i + 0.5) return <FaStarHalfAlt key={i} className="w-4 h-4" />;
+                        else return <FaRegStar key={i} className="w-4 h-4 text-gray-300" />;
+                      })}
+                    </div>
+                    <span className="text-sm font-medium text-gray-500">({item.rating})</span>
+                  </div>
 
-                <p className="text-sm text-gray-500 mb-4">Duration: {item.duration} months</p>
+                  <div className="flex items-center gap-3">
+                    {item.discountPrice < item.price && (
+                      <span className="text-sm text-gray-400 line-through">Rs {item.price}</span>
+                    )}
+                    <span className="text-xl font-bold text-blue-600">Rs {item.discountPrice}</span>
+                  </div>
 
-                {/* Enroll Button */}
-                <button
-                  onClick={() => navigate(`/course/${item._id}`)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium py-2 w-full rounded-md transition mb-2"
-                >
-                  Enroll Now
-                </button>
+                  <p className="text-sm text-gray-500">
+                    <span className="font-medium">Duration:</span> {item.duration}
+                  </p>
 
-                {/* Edit and Delete Buttons */}
-                <div className="flex gap-2">
-                  <button
-                    onClick={()=>{
-                      navigate("editCourse", {state:{...item}})
-                    }}
-                    className="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 rounded-md transition"
-                  >
-                    <CiEdit /> Edit
-                  </button>
-                  <button onClick={()=>{
-                    deleteCourse(item._id);
-                  }}
-                    className="flex-1 bg-red-500 hover:bg-red-600 text-white text-sm font-medium py-2 rounded-md transition"
-                  >
-                     Delete
-                  </button>
+                  <div className="flex gap-3 mt-2">
+                    <button
+                      onClick={() => navigate(`/course/${item._id}`)}
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      Enroll Now
+                    </button>
+                  </div>
+
+                  <div className="flex gap-2 border-t border-gray-100 pt-3">
+                    <button
+                      onClick={() => navigate("editCourse", { state: { ...item } })}
+                      className="flex-1 bg-gray-100 hover:bg-blue-100 text-blue-600 font-medium py-2 rounded-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <CiEdit className="w-5 h-5" />
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteCourse(item._id)}
+                      className="flex-1 bg-gray-100 hover:bg-red-100 text-red-600 font-medium py-2 rounded-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <FaTrash className="w-4 h-4" />
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <div className="text-gray-500 animate-pulse">Loading courses...</div>
             </div>
-          ))
-        ) : (
-          <div className="text-center w-full py-12 text-gray-600">Loading courses...</div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

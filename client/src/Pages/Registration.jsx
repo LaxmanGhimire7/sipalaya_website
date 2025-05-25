@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaArrowRight, FaEnvelope, FaLock, FaPhone, FaUser } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
@@ -50,133 +51,128 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-6 bg-white shadow-md rounded-md">
-        <h2 className="text-2xl font-bold text-center mb-2">Register</h2>
-        <p className="text-sm text-center text-gray-600 mb-4">
-          Kindly fill in this form to register.
-        </p>
+   <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4">
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 mx-4">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
+            Create Account
+          </h2>
+          <p className="text-gray-600">Join our community to get started</p>
+        </div>
 
-        <form onSubmit={formSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter first name"
-              required
-              value={firstName}
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
-            />
+        <form onSubmit={formSubmit} className="space-y-6">
+          {/* Name Row */}
+          <div className="flex gap-4">
+            <div className="flex-1 relative">
+              <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                required
+              />
+            </div>
+            
+            <div className="flex-1 relative">
+              <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                required
+              />
+            </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">Last Name</label>
+          {/* Username */}
+          <div className="relative">
+            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              name="lastName"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter last name"
-              required
-              value={lastName}
-              onChange={(e)=>{
-                setLastName(e.target.value)
-              }}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Username</label>
-            <input
-              type="text"
-              name="username"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter username"
-              required
+              placeholder="Username"
               value={userName}
-              onChange={(e)=>{
-                setUserName(e.target.value)
-              }}
+              onChange={(e) => setUserName(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">Email</label>
+          {/* Email */}
+          <div className="relative">
+            <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="email"
-              name="email"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter email"
-              required
+              placeholder="Email Address"
               value={email}
-              onChange={(e)=>{
-                setEmail(e.target.value)
-              }}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">Phone</label>
+          {/* Phone */}
+          <div className="relative">
+            <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="tel"
-              name="phone"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter phone number"
-              required
+              placeholder="Phone Number"
               value={phone}
-              onChange={(e)=>{
-                setPhone(e.target.value)
-              }}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">Password</label>
+          {/* Password */}
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="password"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter password"
-              required
+              placeholder="Password"
               value={password}
-              onChange={(e)=>{
-                setPassword(e.target.value)
-              }}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">
-              Confirm Password
-            </label>
+          {/* Confirm Password */}
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="password"
-              name="confirmPassword"
-              className="w-full px-3 py-2 border rounded-md"
-              placeholder="Repeat password"
-              required
+              placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e)=>{
-                setConfirmPassword(e.target.value)
-              }}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-purple-700 text-white rounded-md hover:bg-purple-800"
+            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-lg font-semibold 
+            hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-[1.01] shadow-lg"
           >
-            Register
+            Create Account
           </button>
 
-          <p className="text-center text-sm text-gray-600 mt-2">
-            Already have an account?{" "}
-            <NavLink to="/students-login">
-              <button>Go to Login</button>
+<div className="flex justify-center">
+   <p className="text-center text-gray-600 mt-6">
+            Already registered?{" "}
+            <NavLink 
+              to="/students-login" 
+              className=" font-semibold hover:text-blue-700 items-center text-sm justify-center gap-2"
+            >
+              Sign In Now 
             </NavLink>
           </p>
+</div>
+         
         </form>
       </div>
     </div>

@@ -14,9 +14,10 @@ import UserManagement from "./Admin/UserManagement";
 import CourseManagement from "./Admin/CourseManagement";
 import AddCourse from "./Admin/AddCourse";
 import EditCourse from "./Admin/EditCourse";
-import AllCourses from "./Pages/AllCourses";
+
 import CourseDetails from "./Pages/CourseDetails";
 import AdminHome from "./Admin/AdminHome";
+import AllCourses from "./Pages/AllCourses";
 
 
 
@@ -29,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/allCourses" element={<AllCourses/>} />
+        <Route path="/allCourses" element={<AllCourses />} />
         <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/students-login" element={<Login />} />
         <Route path="/registration" element={<Registration/>}/>
@@ -52,6 +53,8 @@ function App() {
 
         </Route>
       </Routes>
+
+      
     </div>
   );
 }
