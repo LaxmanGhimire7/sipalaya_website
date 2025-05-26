@@ -4,38 +4,38 @@ import { FaLock, FaEnvelope } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
+import { toast } from "react-toastify";
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const { dispatch } = useContext(AuthContext);
 
-  const handleForm = async (e)=>{
-    e.preventDefault()
+  const handleForm = async (e) => {
+    e.preventDefault();
     try {
-      let response = await fetch ("http://localhost:9000/api/auth/login",{
-        method:"POST",
-        headers:{
+      let response = await fetch("http://localhost:9000/api/auth/login", {
+        method: "POST",
+        headers: {
           "Content-Type": "application/json",
         },
-        body:JSON.stringify({email, password})
-      })
+        body: JSON.stringify({ email, password }),
+      });
 
-      if(!response.ok){
-        alert(response.error)
+      if (!response.ok) {
+        alert(response.error);
       }
 
       response = await response.json();
       dispatch({ type: "LOGIN", payload: response.token });
-      alert(response.msg);
-
+      toast.success(response.msg); // replaces alert
     } catch (error) {
-      alert(error.message)
+      alert(error.message);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 ">
@@ -69,8 +69,8 @@ function Login() {
                   className="appearance-none block w-full px-10 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 "
                   placeholder="Enter your email or username"
                   value={email}
-                  onChange={(e)=>{
-                    setEmail(e.target.value)
+                  onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                 />
               </div>
@@ -94,7 +94,7 @@ function Login() {
                   className="appearance-none block w-full px-10 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="Enter your password"
                   value={password}
-                  onChange={(e)=>{
+                  onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
