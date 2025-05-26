@@ -7,8 +7,11 @@ import { FaArrowCircleRight, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { FaGraduationCap } from "react-icons/fa6";
 import ChoosingSipalaya from "./ChoosingSipalaya";
 import Footer from "./Footer";
+import AllCourses from "./AllCourses";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   const CustomArrow = ({ direction, onClick }) => (
     <button
       onClick={onClick}
@@ -65,7 +68,7 @@ function Home() {
           backgroundRepeat: "no-repeat",
           height: "80vh",
         }}
-        className=" relative shadow-2xl shadow-gray-100"
+        className=" relative "
       >
         <div className="flex justify-between items-center h-full  z-10">
           <div className="pl-48 w-[800px] -mt-24 relative ">
@@ -95,9 +98,14 @@ function Home() {
                       Enroll Now <FaArrowCircleRight />
                     </button>
 
-                    <button className="mt-8 flex gap-2  items-center bg-gradient-to-r from-blue-600 to-blue-950 text-white  rounded-full text-sm p-3 font-medium ">
+
+                    <button onClick={()=>{
+                      navigate('/allCourses')
+                    }} className="mt-8 flex gap-2  items-center bg-gradient-to-r from-blue-600 to-blue-950 text-white  rounded-full text-sm p-3 font-medium ">
                       View Courses <FaArrowCircleRight />
                     </button>
+                    
+
                     <button className="mt-8 flex items-center gap-2  bg-gradient-to-r from-blue-600 to-blue-950 text-white  rounded-full text-sm p-3 font-medium">
                       Schedule a Demo <FaArrowCircleRight />
                     </button>
@@ -107,13 +115,14 @@ function Home() {
             </Slider>
           </div>
 
+
           <div className="pr-16 ">
-            <img src={homeagain} alt="IT Training" className="max-h-[90vh] " />
+            <img src={homeagain} alt="IT Training" className="max-h-[90vh]" />
           </div>
         </div>
 
         {/* Another Section Start yeta bata */}
-        <div className="flex p-20 justify-center gap-20">
+        <div className="flex p-20 justify-center gap-20 shadow-blue-100 shadow-2xl">
           {/* Card 1 */}
           <div className="group shadow-2xl p-4 h-32 w-96 cursor-pointer rounded-2xl flex gap-x-5 transition-all duration-300 hover:scale-105 hover:bg-gradient-to-r hover:from-indigo-900 hover:to-blue-600">
             <div className="flex justify-center items-center rounded-full border border-dashed w-12 h-12 mt-6 transition-colors duration-300 group-hover:border-white">
@@ -173,11 +182,17 @@ function Home() {
         </div>
 
         {/*  */}
-          <ChoosingSipalaya />
-        
+        <ChoosingSipalaya />
+
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            Explore Our Featured Courses
+          </h2>
+          <AllCourses />
+        </div>
+
         <Footer />
       </div>
-      
     </>
   );
 }

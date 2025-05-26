@@ -64,7 +64,7 @@ function UserProfile() {
         {/* Profile Info */}
         <div className="flex-1 space-y-6">
           <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-gray-800 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold  bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {user?.firstName} {user?.lastName}
             </h1>
             <p className="text-xl text-gray-500 font-medium">@{user?.userName}</p>
