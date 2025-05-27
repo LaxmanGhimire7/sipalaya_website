@@ -4,12 +4,15 @@ import { HiLogout } from "react-icons/hi";
 import { AuthContext } from "../Context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
+import { toast } from "react-toastify";
+
 
 function UserProfile() {
   const navigate = useNavigate();
   const { user, state, dispatch } = useContext(AuthContext);
 
   const [isEdit, setIsEdit] = useState(false);
+  
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setLastName] = useState(user?.lastName || "");
   const [userName, setUserName] = useState(user?.userName);
@@ -17,15 +20,27 @@ function UserProfile() {
   const [phone, setPhone] = useState("");
   const [image, setImage] = useState(null);
 
-  const editUser = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("userName", userName);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("image", image);
+  const fillEdit = () => {
+  setFirstName(user?.firstName || "");
+  setLastName(user?.lastName || "");
+  setUserName(user?.userName || "");
+  setEmail(user?.email || "");
+  setPhone(user?.phone || "");
+  setImage(null);
+};
+
+
+const editUser = async (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
+  formData.append("userName", userName);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("image", image);
+
+  try {
     let response = await fetch("http://localhost:9000/api/auth/editUser", {
       method: "PUT",
       headers: {
@@ -33,9 +48,27 @@ function UserProfile() {
       },
       body: formData,
     });
+
     response = await response.json();
-    console.log(response);
-  };
+    console.log("Edit user response:", response);
+
+    if (response.status === 200 && response.msg === "User updated successfully") {
+      toast.success("Profile updated successfully!");
+
+      setTimeout(() => {
+        setIsEdit(false);       
+        window.location.reload(); 
+      }, 1000);
+    } else {
+      toast.error(response.msg || "Failed to update profile");
+    }
+  } catch (error) {
+    toast.error("Something went wrong!");
+    console.error(error);
+  }
+};
+
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
@@ -54,7 +87,9 @@ function UserProfile() {
             className="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl relative"
           />
           <button
-            onClick={() => setIsEdit(!isEdit)}
+            onClick={() =>{
+              
+              setIsEdit(!isEdit)}}
             className="absolute bottom-4 right-4 bg-blue-600 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all transform hover:scale-110 shadow-lg"
           >
             <BiEdit className="text-white text-2xl" />
@@ -89,7 +124,9 @@ function UserProfile() {
             </button>
 
             <button
-              onClick={() => setIsEdit(true)}
+              onClick={() => {
+                fillEdit();
+                setIsEdit(true)}}
               className="flex items-center gap-3 bg-gradient-to-br from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg"
             >
               <BiEdit className="text-2xl" />
@@ -116,7 +153,7 @@ function UserProfile() {
 
             {/* Edit Form */}
             <form onSubmit={editUser} className="p-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-wrap gap-6">
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
                     First Name
@@ -150,18 +187,7 @@ function UserProfile() {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                  />
-                </div>
-
-                <div className="space-y-2">
+<div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
                     Phone Number
                   </label>
@@ -171,6 +197,20 @@ function UserProfile() {
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                   />
                 </div>
+
+
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-96 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  />
+                </div>
+
+                
 
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
@@ -186,7 +226,7 @@ function UserProfile() {
                       <img 
                         src={URL.createObjectURL(image)} 
                         alt="Preview" 
-                        className="h-12 w-12 rounded-full object-cover border-2 border-blue-100"
+                        className="h-20 w-20 rounded-full object-cover border-2 border-blue-100"
                       />
                     )}
                   </div>

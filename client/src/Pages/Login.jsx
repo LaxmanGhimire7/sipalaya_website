@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,12 +27,13 @@ function Login() {
       });
 
       if (!response.ok) {
-        alert(response.error);
+        toast.error("Email/Passowrd is Incorrect");
+        return;
       }
 
       response = await response.json();
       dispatch({ type: "LOGIN", payload: response.token });
-      toast.success(response.msg); // replaces alert
+      toast.success(response.msg);
     } catch (error) {
       alert(error.message);
     }

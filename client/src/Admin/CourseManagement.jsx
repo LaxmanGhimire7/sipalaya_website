@@ -1,6 +1,4 @@
-
-
-  import { FaStar, FaStarHalfAlt, FaRegStar, FaTrash } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaRegStar, FaTrash } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";

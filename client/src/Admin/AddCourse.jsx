@@ -1,6 +1,5 @@
-
-  import { useState } from "react";
-import { 
+import { useState } from "react";
+import {
   BookOpenIcon,
   UserCircleIcon,
   StarIcon,
@@ -9,11 +8,13 @@ import {
   TagIcon,
   PhotoIcon,
   CheckBadgeIcon,
-  FireIcon
+  FireIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddCourse() {
-  
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [instructor, setInstructor] = useState("");
   const [rating, setRating] = useState(0);
@@ -25,6 +26,7 @@ function AddCourse() {
   const [isFeatured, setIsFeatured] = useState(false);
 
   const formSubmit = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
     formData.append("price", price);
@@ -32,21 +34,32 @@ function AddCourse() {
     formData.append("instructor", instructor);
     formData.append("rating", rating);
     formData.append("duration", duration);
-    formData.append("isBestseller", isBestseller); 
+    formData.append("isBestseller", isBestseller);
     formData.append("isFeatured", isFeatured);
     formData.append("image", image);
-    e.preventDefault();
-    let response = await fetch(
-      "http://localhost:9000/api/course/createCourse",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    response = await response.json();
-    console.log(response);
-  };
 
+    try {
+      const response = await fetch(
+        "http://localhost:9000/api/course/createCourse",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.msg || "Failed to create course");
+        return;
+      }
+
+      toast.success("Course created successfully!");
+      navigate("/dashboard/course");
+    } catch (error) {
+      toast.error("Something went wrong: " + error.message);
+    }
+  };
 
   return (
     <div className=" p-10 ml-52 mt-8 bg-white rounded-xl shadow-lg border border-blue-50">
@@ -55,7 +68,9 @@ function AddCourse() {
           <BookOpenIcon className="h-8 w-8 text-blue-600" />
           Add New Course
         </h2>
-        <p className="text-gray-600 mt-2">Fill in the details to create a new course</p>
+        <p className="text-gray-600 mt-2">
+          Fill in the details to create a new course
+        </p>
       </div>
 
       <form onSubmit={formSubmit} className="space-y-6">
@@ -172,7 +187,6 @@ function AddCourse() {
                   onChange={(e) => setImage(e.target.files[0])}
                   className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                 />
-                
               </div>
             </div>
 
@@ -223,6 +237,3 @@ function AddCourse() {
 }
 
 export default AddCourse;
-
-
-

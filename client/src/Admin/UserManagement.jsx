@@ -132,7 +132,12 @@ function UserManagement() {
                   <td className="py-3 px-4">
                     <button
                       onClick={() => {
-                        deleteUser(user._id);
+                        const confirmDelete = window.confirm(
+                          "Are you sure you want to delete this user?"
+                        );
+                        if (confirmDelete) {
+                          deleteUser(user._id);
+                        }
                       }}
                       className="text-red-600 hover:text-red-800 font-medium text-sm"
                     >
