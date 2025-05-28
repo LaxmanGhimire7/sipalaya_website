@@ -314,8 +314,8 @@ function Home() {
             })}
           </div>
           <div className="flex justify-center mt-6">
-            <button
-              onClick={() => navigate("/allCourses")}
+                         <button
+                              onClick={() => navigate("/allCourses")}
               className="bg-gradient-to-r from-blue-600 to-blue-950 text-white rounded-full px-6 py-3 text-sm font-medium hover:scale-105 transition-transform"
             >
               Explore All Courses

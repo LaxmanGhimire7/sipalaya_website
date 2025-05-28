@@ -1,5 +1,5 @@
 import {
-    FaUserGraduate,
+  
     FaChalkboardTeacher,
     FaClock,
     FaBuilding,
@@ -7,6 +7,7 @@ import {
     FaHandshake,
     FaRupeeSign,
     FaStar,
+    FaUserGraduate,
   } from "react-icons/fa";
   import homebackground from "../images/homebackground.png";
   
